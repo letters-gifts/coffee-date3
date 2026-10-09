@@ -1,0 +1,2955 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<title>Letters | Coffee</title>
+
+<style>
+
+/* =====================================================
+   COLORS
+===================================================== */
+
+:root {
+    --teal: #31565a;
+    --teal-dark: #203c40;
+    --teal-light: #58777a;
+
+    --wood: #684732;
+    --wood-dark: #3d281d;
+    --wood-light: #916846;
+
+    --paper: #f1dfbd;
+    --paper-light: #faecd2;
+
+    --brown: #6d472e;
+    --caramel: #a96f40;
+
+    --cream: #f7ead4;
+    --ink: #493126;
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #1f383b;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* =====================================================
+   PAGE / 9:16 PHONE
+===================================================== */
+
+.page {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100dvh;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.page.active {
+    display: flex;
+}
+
+
+/* على الكمبيوتر يظهر كأنه شاشة جوال */
+
+@media (min-width: 600px) {
+
+    .page {
+        width: min(
+            100vw,
+            calc(100dvh * .5625)
+        );
+
+        height: min(
+            100dvh,
+            calc(100vw / .5625)
+        );
+
+        left: 50%;
+        right: auto;
+
+        transform: translateX(-50%);
+
+        box-shadow:
+            0 0 70px rgba(0,0,0,.35);
+    }
+
+}
+
+
+/* =====================================================
+   CAFE WALL
+===================================================== */
+
+.cafe {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 13%,
+            rgba(255,220,166,.18),
+            transparent 24%
+        ),
+
+        repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 0,
+            rgba(255,255,255,.018) 2px,
+            transparent 2px,
+            transparent 11px
+        ),
+
+        linear-gradient(
+            135deg,
+            #3a5c60,
+            #2b494d 55%,
+            #213d40
+        );
+}
+
+
+/* =====================================================
+   WOOD COUNTER
+===================================================== */
+
+.counter {
+    position: absolute;
+
+    left: -5%;
+    right: -5%;
+    bottom: -3%;
+
+    height: 19%;
+
+    z-index: 2;
+
+    background:
+
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.025) 0,
+            rgba(255,255,255,.025) 2px,
+            transparent 2px,
+            transparent 14px
+        ),
+
+        repeating-linear-gradient(
+            90deg,
+            rgba(0,0,0,.09) 0,
+            rgba(0,0,0,.09) 60px,
+            transparent 60px,
+            transparent 130px
+        ),
+
+        linear-gradient(
+            #78543a,
+            #4b3022
+        );
+
+    box-shadow:
+        0 -15px 35px rgba(0,0,0,.25);
+}
+
+
+/* =====================================================
+   WINDOW
+===================================================== */
+
+.window {
+    position: absolute;
+
+    top: 7%;
+    left: 4%;
+
+    width: 27%;
+    height: 20%;
+
+    min-width: 85px;
+    min-height: 120px;
+
+    z-index: 3;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d9c99d,
+            #91aaa5
+        );
+
+    border:
+        7px solid #52372a;
+
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,.20),
+        0 10px 25px rgba(0,0,0,.20);
+}
+
+.window::before {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+    bottom: 0;
+
+    width: 5px;
+
+    background: #593a2a;
+
+    transform: translateX(-50%);
+}
+
+.window::after {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+    right: 0;
+
+    height: 5px;
+
+    background: #593a2a;
+
+    transform: translateY(-50%);
+}
+
+
+/* =====================================================
+   WINDOW AWNING
+===================================================== */
+
+.awning {
+    position: absolute;
+
+    top: 5%;
+    left: 2%;
+
+    width: 31%;
+    height: 4%;
+
+    min-height: 18px;
+
+    z-index: 5;
+
+    border-radius:
+        0
+        0
+        18px
+        18px;
+
+    background:
+
+        repeating-linear-gradient(
+            90deg,
+            #ead8b7 0,
+            #ead8b7 19px,
+            #577578 19px,
+            #577578 38px
+        );
+
+    box-shadow:
+        0 5px 8px rgba(0,0,0,.15);
+}
+
+
+/* =====================================================
+   WALL MENU FRAME
+===================================================== */
+
+.wall-frame {
+    position: absolute;
+
+    top: 8%;
+    right: 4%;
+
+    width: 27%;
+    height: 18%;
+
+    min-width: 95px;
+    min-height: 125px;
+
+    z-index: 3;
+
+    border:
+        7px solid #513628;
+
+    background:
+        #24383a;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.25);
+}
+
+.wall-frame-title {
+    text-align: center;
+
+    color: #e7d5b7;
+
+    font-family: Georgia, serif;
+
+    font-size:
+        clamp(8px, 2vw, 13px);
+
+    letter-spacing: 1px;
+
+    margin-top: 10px;
+}
+
+.menu-line {
+    height: 1px;
+
+    width: 70%;
+
+    background:
+        rgba(231,213,183,.55);
+
+    margin: 7px auto;
+}
+
+.menu-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 3px 8px;
+
+    color: #d8c7a9;
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(6px, 1.5vw, 9px);
+}
+
+
+/* =====================================================
+   WOODEN SHELF
+===================================================== */
+
+.shelf {
+    position: absolute;
+
+    top: 28%;
+    right: 3%;
+
+    width: 31%;
+    height: 18%;
+
+    min-width: 100px;
+
+    z-index: 5;
+}
+
+.shelf-board {
+    position: absolute;
+
+    left: 0;
+
+    width: 100%;
+    height: 8px;
+
+    background:
+        linear-gradient(
+            #936849,
+            #5d3c29
+        );
+
+    border-radius: 3px;
+
+    box-shadow:
+        0 5px 8px rgba(0,0,0,.22);
+}
+
+.shelf-board.top {
+    top: 17%;
+}
+
+.shelf-board.bottom {
+    top: 76%;
+}
+
+.shelf-support {
+    position: absolute;
+
+    width: 5px;
+    height: 68%;
+
+    top: 17%;
+
+    background:
+        #543624;
+}
+
+.shelf-support.left {
+    left: 15%;
+}
+
+.shelf-support.right {
+    right: 15%;
+}
+
+
+/* =====================================================
+   PLANT ON SHELF
+===================================================== */
+
+.shelf-plant {
+    position: absolute;
+
+    top: 0;
+    right: 16%;
+
+    width: 40px;
+    height: 57px;
+}
+
+.shelf-pot {
+    position: absolute;
+
+    bottom: 0;
+    left: 7px;
+
+    width: 27px;
+    height: 21px;
+
+    background:
+        linear-gradient(
+            #bd8b65,
+            #986346
+        );
+
+    border-radius:
+        3px
+        3px
+        9px
+        9px;
+}
+
+.shelf-stem {
+    position: absolute;
+
+    bottom: 15px;
+    left: 19px;
+
+    width: 2px;
+    height: 33px;
+
+    background:
+        #5b6e52;
+}
+
+.shelf-leaf {
+    position: absolute;
+
+    width: 18px;
+    height: 29px;
+
+    background:
+        #718765;
+
+    border-radius:
+        100%
+        0
+        100%
+        0;
+
+    transform-origin:
+        bottom center;
+}
+
+.shelf-leaf.one {
+    left: 3px;
+    bottom: 28px;
+
+    transform:
+        rotate(-37deg);
+}
+
+.shelf-leaf.two {
+    left: 17px;
+    bottom: 34px;
+
+    transform:
+        rotate(22deg);
+}
+
+.shelf-leaf.three {
+    left: 20px;
+    bottom: 23px;
+
+    transform:
+        rotate(47deg);
+}
+
+
+/* =====================================================
+   CUP ON SHELF
+===================================================== */
+
+.shelf-cup {
+    position: absolute;
+
+    bottom: 8px;
+    left: 17%;
+
+    width: 20px;
+    height: 16px;
+
+    border-radius:
+        2px
+        2px
+        7px
+        7px;
+
+    background:
+        #ead7b8;
+}
+
+.shelf-cup::before {
+    content: "";
+
+    position: absolute;
+
+    width: 15px;
+    height: 5px;
+
+    top: -3px;
+    left: 2px;
+
+    border-radius: 50%;
+
+    background:
+        #4a3023;
+}
+
+
+/* =====================================================
+   LAMP
+===================================================== */
+
+.lamp {
+    position: absolute;
+
+    top: -2%;
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        scale(.72);
+
+    transform-origin:
+        top center;
+
+    width: 100px;
+    height: 120px;
+
+    z-index: 6;
+}
+
+.lamp-wire {
+    width: 3px;
+    height: 56px;
+
+    margin: auto;
+
+    background:
+        #272321;
+}
+
+.lamp-shade {
+    position: relative;
+
+    width: 100px;
+    height: 53px;
+
+    background:
+        linear-gradient(
+            #8e694b,
+            #4c3629
+        );
+
+    border-radius:
+        50%
+        50%
+        15px
+        15px;
+}
+
+.lamp-bulb {
+    position: absolute;
+
+    width: 27px;
+    height: 27px;
+
+    left: 36px;
+    bottom: -13px;
+
+    border-radius: 50%;
+
+    background:
+        #ffd98f;
+
+    box-shadow:
+        0 0 30px #ffd98f,
+        0 0 65px rgba(255,217,143,.45);
+}
+
+
+/* =====================================================
+   ESPRESSO MACHINE
+===================================================== */
+
+.machine {
+    position: absolute;
+
+    right: 2%;
+    bottom: 16%;
+
+    width: 28%;
+
+    min-width: 105px;
+
+    height: 13%;
+
+    min-height: 78px;
+
+    z-index: 7;
+
+    border:
+        3px solid #223537;
+
+    border-radius:
+        8px
+        8px
+        4px
+        4px;
+
+    background:
+        linear-gradient(
+            #4d696b,
+            #2a4143
+        );
+
+    box-shadow:
+        0 10px 20px rgba(0,0,0,.28);
+}
+
+.machine-top {
+    position: absolute;
+
+    top: -12px;
+    left: 10px;
+    right: 10px;
+
+    height: 14px;
+
+    background:
+        #5e7879;
+
+    border-radius:
+        6px
+        6px
+        2px
+        2px;
+}
+
+.machine-button {
+    position: absolute;
+
+    top: 15px;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background:
+        #d1a56c;
+}
+
+.machine-button.one {
+    right: 14px;
+}
+
+.machine-button.two {
+    right: 31px;
+}
+
+.machine-gauge {
+    position: absolute;
+
+    top: 29px;
+    left: 12px;
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    background:
+        #ead8bc;
+
+    border:
+        3px solid #70513d;
+}
+
+.machine-gauge::after {
+    content: "";
+
+    position: absolute;
+
+    left: 12px;
+    top: 4px;
+
+    width: 2px;
+    height: 9px;
+
+    background:
+        #513a2c;
+
+    transform:
+        rotate(25deg);
+}
+
+.portafilter {
+    position: absolute;
+
+    top: 47px;
+    right: 18px;
+
+    width: 34px;
+    height: 5px;
+
+    border-radius: 5px;
+
+    background:
+        #282321;
+
+    transform:
+        rotate(8deg);
+}
+
+.portafilter::after {
+    content: "";
+
+    position: absolute;
+
+    right: -27px;
+    top: 1px;
+
+    width: 30px;
+    height: 4px;
+
+    background:
+        #292321;
+
+    border-radius: 5px;
+}
+
+.coffee-stream {
+    position: absolute;
+
+    top: 53px;
+    right: 35px;
+
+    width: 3px;
+    height: 21px;
+
+    background:
+        #6d4028;
+
+    animation:
+        drip 1.4s infinite;
+}
+
+@keyframes drip {
+
+    0% {
+        height: 6px;
+        opacity: .4;
+    }
+
+    50% {
+        height: 21px;
+        opacity: 1;
+    }
+
+    100% {
+        height: 6px;
+        opacity: .4;
+    }
+}
+
+
+/* =====================================================
+   TABLE CUP
+===================================================== */
+
+.table-cup {
+    position: absolute;
+
+    right: 22%;
+    bottom: 6%;
+
+    width: 58px;
+    height: 39px;
+
+    z-index: 6;
+
+    background:
+        #e9d7b8;
+
+    border-radius:
+        4px
+        4px
+        18px
+        18px;
+}
+
+.table-cup::before {
+    content: "";
+
+    position: absolute;
+
+    top: -6px;
+    left: 5px;
+
+    width: 48px;
+    height: 13px;
+
+    border-radius: 50%;
+
+    background:
+        #4a3023;
+
+    border:
+        3px solid #ead7b8;
+}
+
+
+/* =====================================================
+   COFFEE BEANS
+===================================================== */
+
+.bean-pile {
+    position: absolute;
+
+    left: 3%;
+    bottom: 5%;
+
+    width: 105px;
+    height: 55px;
+
+    z-index: 6;
+}
+
+.bean {
+    position: absolute;
+
+    width: 12px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #56321f,
+            #2d1b12
+        );
+
+    transform:
+        rotate(35deg);
+}
+
+.bean:nth-child(1) {
+    left: 5px;
+    top: 18px;
+}
+
+.bean:nth-child(2) {
+    left: 26px;
+    top: 5px;
+}
+
+.bean:nth-child(3) {
+    left: 47px;
+    top: 20px;
+}
+
+.bean:nth-child(4) {
+    left: 69px;
+    top: 8px;
+}
+
+.bean:nth-child(5) {
+    left: 89px;
+    top: 27px;
+}
+
+.bean:nth-child(6) {
+    left: 35px;
+    top: 34px;
+}
+
+
+/* =====================================================
+   CROISSANT
+===================================================== */
+
+.croissant {
+    position: absolute;
+
+    right: 3%;
+    bottom: 3%;
+
+    width: 82px;
+    height: 45px;
+
+    z-index: 6;
+}
+
+.croissant-part {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius:
+        70%
+        30%
+        60%
+        30%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d79b58,
+            #985a30
+        );
+}
+
+.croissant-part.one {
+    left: 0;
+
+    transform:
+        rotate(25deg);
+}
+
+.croissant-part.two {
+    left: 22px;
+}
+
+.croissant-part.three {
+    right: 0;
+
+    transform:
+        rotate(-25deg);
+}
+
+
+/* =====================================================
+   NOTES
+===================================================== */
+
+.note {
+    position: absolute;
+
+    z-index: 7;
+
+    padding:
+        7px
+        10px;
+
+    background:
+        #f1dfbd;
+
+    color:
+        #765946;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        8px;
+
+    box-shadow:
+        0 5px 12px rgba(0,0,0,.18);
+}
+
+.note.one {
+    left: 4%;
+    bottom: 22%;
+
+    transform:
+        rotate(-6deg);
+}
+
+.note.two {
+    right: 4%;
+    top: 47%;
+
+    transform:
+        rotate(5deg);
+}
+
+
+/* =====================================================
+   CENTER CONTENT
+===================================================== */
+
+.content {
+    position: relative;
+
+    z-index: 30;
+
+    width: 86%;
+    max-width: 360px;
+
+    max-height: 86%;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo {
+    direction: ltr;
+
+    color:
+        #f6e8ce;
+
+    font-size:
+        clamp(18px, 5vw, 23px);
+
+    letter-spacing: 2px;
+
+    margin-bottom: 8px;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.3);
+}
+
+.logo span {
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   PAPER
+===================================================== */
+
+.paper {
+    position: relative;
+
+    width: 100%;
+
+    padding:
+        25px
+        17px
+        22px;
+
+    overflow: hidden;
+
+    border:
+        1px solid rgba(72,49,35,.25);
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(250,237,213,.99),
+            rgba(231,211,178,.98)
+        );
+
+    box-shadow:
+        0 22px 60px rgba(0,0,0,.38);
+}
+
+.paper::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 9px;
+
+    border:
+        1px solid rgba(83,58,40,.20);
+
+    pointer-events: none;
+}
+
+.paper::after {
+    content: "♡";
+
+    position: absolute;
+
+    top: 9px;
+    left: 12px;
+
+    color:
+        rgba(110,75,48,.35);
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   SMALL LABEL
+===================================================== */
+
+.small {
+    position: relative;
+
+    z-index: 3;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    color:
+        #876c54;
+
+    margin-bottom: 3px;
+}
+
+
+/* =====================================================
+   COFFEE ICON
+===================================================== */
+
+.coffee-icon {
+    position: relative;
+
+    width: 88px;
+    height: 72px;
+
+    margin:
+        -2px
+        auto
+        -4px;
+}
+
+.coffee-cup {
+    position: absolute;
+
+    left: 13px;
+    bottom: 1px;
+
+    width: 62px;
+    height: 39px;
+
+    background:
+        linear-gradient(
+            #f7e8cc,
+            #d8c09d
+        );
+
+    border-radius:
+        4px
+        4px
+        18px
+        18px;
+
+    box-shadow:
+        0 6px 10px rgba(73,49,35,.18);
+}
+
+.coffee-cup::before {
+    content: "";
+
+    position: absolute;
+
+    left: 6px;
+    top: -7px;
+
+    width: 50px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    background:
+        #4b2f22;
+
+    border:
+        4px solid #ead7b6;
+}
+
+.coffee-cup::after {
+    content: "";
+
+    position: absolute;
+
+    right: -20px;
+    top: 9px;
+
+    width: 22px;
+    height: 22px;
+
+    border:
+        5px solid #d8bf9e;
+
+    border-left: 0;
+
+    border-radius:
+        0
+        50%
+        50%
+        0;
+}
+
+
+/* =====================================================
+   STEAM
+===================================================== */
+
+.steam {
+    position: absolute;
+
+    top: -3px;
+    left: 25px;
+
+    width: 43px;
+    height: 40px;
+}
+
+.steam span {
+    position: absolute;
+
+    width: 5px;
+    height: 30px;
+
+    border-left:
+        2px solid rgba(101,78,61,.48);
+
+    border-radius: 50%;
+
+    animation:
+        steamRise
+        2s
+        infinite
+        ease-in-out;
+}
+
+.steam span:nth-child(1) {
+    left: 3px;
+}
+
+.steam span:nth-child(2) {
+    left: 19px;
+
+    animation-delay: .4s;
+}
+
+.steam span:nth-child(3) {
+    left: 34px;
+
+    animation-delay: .8s;
+}
+
+@keyframes steamRise {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            rotate(5deg);
+    }
+
+    50% {
+        opacity: .7;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateY(-5px)
+            rotate(-5deg);
+    }
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+h1 {
+    position: relative;
+
+    z-index: 3;
+
+    margin: 0;
+
+    color:
+        var(--ink);
+
+    font-size:
+        clamp(
+            34px,
+            10vw,
+            46px
+        );
+
+    font-weight: normal;
+
+    line-height: 1.35;
+}
+
+.subtitle {
+    position: relative;
+
+    z-index: 3;
+
+    margin:
+        5px
+        0
+        12px;
+
+    font-size: 13px;
+
+    color:
+        #765c49;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.buttons {
+    position: relative;
+
+    z-index: 10;
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+
+    direction: ltr;
+}
+
+button {
+    border: none;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+
+    padding:
+        12px
+        27px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    -webkit-user-select: none;
+
+    touch-action: none;
+
+    box-shadow:
+        0 7px 17px rgba(67,44,31,.18);
+}
+
+.yes {
+    background:
+        var(--teal);
+
+    color:
+        #f7ead4;
+}
+
+.no {
+    position: relative;
+
+    background:
+        var(--caramel);
+
+    color:
+        #fff0d9;
+
+    transition:
+        transform
+        .28s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* =====================================================
+   NO MESSAGE
+===================================================== */
+
+.no-message {
+    position: absolute;
+
+    left: 50%;
+    bottom: -8px;
+
+    width: 100%;
+
+    transform:
+        translateX(-50%);
+
+    color:
+        #714d36;
+
+    font-size: 11px;
+
+    opacity: 0;
+
+    transition:
+        opacity .25s ease;
+}
+
+.no-message.show {
+    opacity: 1;
+}
+
+
+/* =====================================================
+   PAGE 2
+===================================================== */
+
+.confirm-paper {
+    padding:
+        25px
+        17px
+        22px;
+}
+
+.confirm-title {
+    margin: 0;
+
+    font-size:
+        clamp(
+            31px,
+            9vw,
+            43px
+        );
+
+    font-weight:
+        normal;
+}
+
+.confirm-line {
+    width: 48px;
+    height: 1px;
+
+    background:
+        #9b7b5c;
+
+    margin:
+        9px
+        auto
+        10px;
+}
+
+
+/* =====================================================
+   MINI CAFE
+===================================================== */
+
+.mini-cafe {
+    position: relative;
+
+    width: 155px;
+    height: 63px;
+
+    margin:
+        0
+        auto
+        10px;
+}
+
+.mini-shop {
+    position: absolute;
+
+    left: 18px;
+    bottom: 2px;
+
+    width: 120px;
+    height: 43px;
+
+    background:
+        #6d503d;
+
+    border-radius:
+        5px
+        5px
+        0
+        0;
+}
+
+.mini-roof {
+    position: absolute;
+
+    top: 0;
+    left: 8px;
+
+    width: 138px;
+    height: 15px;
+
+    z-index: 3;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #9e6f49 0,
+            #9e6f49 18px,
+            #4b6262 18px,
+            #4b6262 36px
+        );
+
+    border-radius:
+        5px
+        5px
+        0
+        0;
+}
+
+.mini-door {
+    position: absolute;
+
+    left: 52px;
+    bottom: 0;
+
+    width: 30px;
+    height: 35px;
+
+    z-index: 4;
+
+    background:
+        #344b4d;
+
+    border:
+        3px solid #d4b995;
+}
+
+.mini-window {
+    position: absolute;
+
+    right: 12px;
+    bottom: 12px;
+
+    width: 34px;
+    height: 24px;
+
+    z-index: 4;
+
+    background:
+        #d8c89f;
+
+    border:
+        3px solid #443227;
+}
+
+.mini-sign {
+    position: absolute;
+
+    right: -4px;
+    bottom: 0;
+
+    width: 31px;
+    height: 38px;
+
+    z-index: 5;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        #2e4749;
+
+    color:
+        #e8d6b6;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 5px;
+
+    transform:
+        rotate(5deg);
+}
+
+
+/* =====================================================
+   DETAILS
+===================================================== */
+
+.details {
+    margin:
+        7px
+        0
+        13px;
+
+    border:
+        1px solid rgba(72,49,36,.22);
+
+    background:
+        rgba(255,248,232,.45);
+}
+
+.detail {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding:
+        9px
+        12px;
+
+    border-bottom:
+        1px dashed rgba(72,49,36,.18);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+}
+
+.detail:last-child {
+    border-bottom: none;
+}
+
+.label {
+    color:
+        #8b7058;
+}
+
+.value {
+    color:
+        #4c3628;
+}
+
+
+/* =====================================================
+   FINAL TEXT
+===================================================== */
+
+.final-text {
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    color:
+        #6c513f;
+}
+
+
+/* =====================================================
+   MADE BY LETTERS
+===================================================== */
+
+.made {
+    margin-top: 15px;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    color:
+        #92765c;
+}
+
+
+/* =====================================================
+   FALLING COFFEE BEANS
+===================================================== */
+
+.coffee-bean-fall {
+    position: fixed;
+
+    top: -35px;
+
+    z-index: 9999;
+
+    width: 13px;
+    height: 19px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #603a25,
+            #2d1a10
+        );
+
+    box-shadow:
+        inset -2px -2px 3px rgba(0,0,0,.20);
+
+    pointer-events: none;
+
+    animation:
+        beanFall
+        2.4s
+        cubic-bezier(.2,.65,.3,1)
+        forwards;
+}
+
+.coffee-bean-fall::after {
+    content: "";
+
+    position: absolute;
+
+    left: 5px;
+    top: 2px;
+
+    width: 2px;
+    height: 15px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(20,10,5,.55);
+
+    transform:
+        rotate(7deg);
+}
+
+@keyframes beanFall {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(-30px)
+            rotate(0deg)
+            scale(.5);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateY(110vh)
+            translateX(var(--drift))
+            rotate(520deg)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   FALLING HEARTS
+===================================================== */
+
+.heart-fall {
+    position: fixed;
+
+    top: -30px;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+    color:
+        #bd7767;
+
+    font-family:
+        Georgia,
+        serif;
+
+    animation:
+        heartFall
+        2.6s
+        ease-in
+        forwards;
+}
+
+@keyframes heartFall {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(-30px)
+            rotate(-10deg)
+            scale(.5);
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateY(110vh)
+            translateX(var(--drift))
+            rotate(220deg)
+            scale(1.1);
+    }
+}
+
+
+/* =====================================================
+   PAGE ENTER
+===================================================== */
+
+.page.entering .content {
+    animation:
+        pageEnter
+        .7s
+        ease
+        both;
+}
+
+@keyframes pageEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .window {
+        top: 7%;
+        left: 3%;
+
+        width: 25%;
+        height: 17%;
+    }
+
+    .awning {
+        top: 5%;
+        left: 1%;
+
+        width: 29%;
+    }
+
+    .wall-frame {
+        top: 7%;
+        right: 3%;
+
+        width: 25%;
+        height: 16%;
+    }
+
+    .shelf {
+        top: 25%;
+        right: 2%;
+
+        width: 28%;
+        height: 16%;
+    }
+
+    .shelf-plant {
+        transform:
+            scale(.9);
+
+        transform-origin:
+            bottom center;
+    }
+
+    .machine {
+        right: -1%;
+        bottom: 15%;
+
+        transform:
+            scale(.85);
+
+        transform-origin:
+            bottom right;
+    }
+
+    .lamp {
+        transform:
+            translateX(-50%)
+            scale(.62);
+    }
+
+    .table-cup {
+        transform:
+            scale(.75);
+
+        transform-origin:
+            bottom right;
+    }
+
+    .croissant {
+        transform:
+            scale(.75);
+
+        transform-origin:
+            bottom right;
+    }
+
+    .note {
+        display: none;
+    }
+
+    .content {
+        width: 86%;
+        max-width: 360px;
+    }
+
+    .paper {
+        padding:
+            23px
+            16px
+            20px;
+    }
+
+    .coffee-icon {
+        transform:
+            scale(.82);
+
+        transform-origin:
+            center;
+
+        margin:
+            -7px
+            auto
+            -7px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+}
+
+
+/* =====================================================
+   SHORT PHONES
+===================================================== */
+
+@media (max-height: 700px) {
+
+    .content {
+        width: 84%;
+    }
+
+    .paper {
+        padding:
+            17px
+            15px
+            16px;
+    }
+
+    .coffee-icon {
+        transform:
+            scale(.65);
+
+        margin:
+            -12px
+            auto
+            -13px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .subtitle {
+        font-size: 11px;
+
+        margin-bottom: 7px;
+    }
+
+    .buttons {
+        height: 58px;
+    }
+
+    .confirm-paper {
+        padding:
+            17px
+            15px
+            16px;
+    }
+
+    .mini-cafe {
+        transform:
+            scale(.8);
+
+        margin:
+            -5px
+            auto
+            0;
+    }
+
+    .details {
+        margin-bottom: 8px;
+    }
+
+    .detail {
+        padding:
+            7px
+            10px;
+    }
+
+    .made {
+        margin-top: 8px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PAGE 1
+===================================================== -->
+
+<section
+    class="page active"
+    id="page1">
+
+
+    <div class="cafe"></div>
+
+    <div class="counter"></div>
+
+
+    <div class="window"></div>
+
+    <div class="awning"></div>
+
+
+    <div class="wall-frame">
+
+        <div class="wall-frame-title">
+            COFFEE MENU
+        </div>
+
+        <div class="menu-line"></div>
+
+        <div class="menu-item">
+            <span>Espresso</span>
+            <span>3.0</span>
+        </div>
+
+        <div class="menu-item">
+            <span>Latte</span>
+            <span>4.0</span>
+        </div>
+
+        <div class="menu-item">
+            <span>Mocha</span>
+            <span>4.5</span>
+        </div>
+
+        <div class="menu-item">
+            <span>Americano</span>
+            <span>3.5</span>
+        </div>
+
+    </div>
+
+
+    <!-- SHELF -->
+
+    <div class="shelf">
+
+        <div class="shelf-board top"></div>
+
+        <div class="shelf-board bottom"></div>
+
+        <div class="shelf-support left"></div>
+
+        <div class="shelf-support right"></div>
+
+
+        <div class="shelf-plant">
+
+            <div class="shelf-stem"></div>
+
+            <div class="shelf-leaf one"></div>
+
+            <div class="shelf-leaf two"></div>
+
+            <div class="shelf-leaf three"></div>
+
+            <div class="shelf-pot"></div>
+
+        </div>
+
+
+        <div class="shelf-cup"></div>
+
+    </div>
+
+
+    <!-- LAMP -->
+
+    <div class="lamp">
+
+        <div class="lamp-wire"></div>
+
+        <div class="lamp-shade">
+
+            <div class="lamp-bulb"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MACHINE -->
+
+    <div class="machine">
+
+        <div class="machine-top"></div>
+
+        <div class="machine-button one"></div>
+
+        <div class="machine-button two"></div>
+
+        <div class="machine-gauge"></div>
+
+        <div class="portafilter"></div>
+
+        <div class="coffee-stream"></div>
+
+    </div>
+
+
+    <div class="table-cup"></div>
+
+
+    <div class="bean-pile">
+
+        <div class="bean"></div>
+
+        <div class="bean"></div>
+
+        <div class="bean"></div>
+
+        <div class="bean"></div>
+
+        <div class="bean"></div>
+
+        <div class="bean"></div>
+
+    </div>
+
+
+    <div class="croissant">
+
+        <div class="croissant-part one"></div>
+
+        <div class="croissant-part two"></div>
+
+        <div class="croissant-part three"></div>
+
+    </div>
+
+
+    <div class="note one">
+        good coffee
+    </div>
+
+    <div class="note two">
+        coffee time
+    </div>
+
+
+    <!-- CENTER -->
+
+    <div class="content">
+
+
+        <div class="logo">
+
+            Letters
+            <span>♡</span>
+
+        </div>
+
+
+        <div class="paper">
+
+
+            <div class="small">
+                COFFEE INVITATION
+            </div>
+
+
+            <div class="coffee-icon">
+
+
+                <div class="steam">
+
+                    <span></span>
+
+                    <span></span>
+
+                    <span></span>
+
+                </div>
+
+
+                <div class="coffee-cup"></div>
+
+
+            </div>
+
+
+            <h1>
+                نخلق الصدف… والعذر قهوة؟
+            </h1>
+
+
+            <p class="subtitle">
+                عندي لك دعوة صغيرة...
+            </p>
+
+
+            <div class="buttons">
+
+
+                <button
+                    class="yes"
+                    id="yesButton"
+                    type="button">
+
+                    نعم 
+
+                </button>
+
+
+                <button
+                    class="no"
+                    id="noButton"
+                    type="button">
+
+                    لا
+
+                </button>
+
+
+                <div
+                    class="no-message"
+                    id="noMessage">
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 2
+===================================================== -->
+
+<section
+    class="page"
+    id="page2">
+
+
+    <div class="cafe"></div>
+
+    <div class="counter"></div>
+
+
+    <div class="window"></div>
+
+    <div class="awning"></div>
+
+
+    <div class="wall-frame">
+
+        <div class="wall-frame-title">
+            COFFEE MENU
+        </div>
+
+        <div class="menu-line"></div>
+
+        <div class="menu-item">
+            <span>Espresso</span>
+            <span>3.0</span>
+        </div>
+
+        <div class="menu-item">
+            <span>Latte</span>
+            <span>4.0</span>
+        </div>
+
+        <div class="menu-item">
+            <span>Mocha</span>
+            <span>4.5</span>
+        </div>
+
+    </div>
+
+
+    <!-- SHELF -->
+
+    <div class="shelf">
+
+        <div class="shelf-board top"></div>
+
+        <div class="shelf-board bottom"></div>
+
+        <div class="shelf-support left"></div>
+
+        <div class="shelf-support right"></div>
+
+
+        <div class="shelf-plant">
+
+            <div class="shelf-stem"></div>
+
+            <div class="shelf-leaf one"></div>
+
+            <div class="shelf-leaf two"></div>
+
+            <div class="shelf-leaf three"></div>
+
+            <div class="shelf-pot"></div>
+
+        </div>
+
+
+        <div class="shelf-cup"></div>
+
+    </div>
+
+
+    <!-- LAMP -->
+
+    <div class="lamp">
+
+        <div class="lamp-wire"></div>
+
+        <div class="lamp-shade">
+
+            <div class="lamp-bulb"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MACHINE -->
+
+    <div class="machine">
+
+        <div class="machine-top"></div>
+
+        <div class="machine-button one"></div>
+
+        <div class="machine-button two"></div>
+
+        <div class="machine-gauge"></div>
+
+        <div class="portafilter"></div>
+
+        <div class="coffee-stream"></div>
+
+    </div>
+
+
+    <div class="table-cup"></div>
+
+
+    <div class="bean-pile">
+
+        <div class="bean"></div>
+
+        <div class="bean"></div>
+
+        <div class="bean"></div>
+
+        <div class="bean"></div>
+
+        <div class="bean"></div>
+
+        <div class="bean"></div>
+
+    </div>
+
+
+    <div class="croissant">
+
+        <div class="croissant-part one"></div>
+
+        <div class="croissant-part two"></div>
+
+        <div class="croissant-part three"></div>
+
+    </div>
+
+
+    <div class="content">
+
+
+        <div class="logo">
+
+            Letters
+            <span>♡</span>
+
+        </div>
+
+
+        <div class="paper confirm-paper">
+
+
+            <div class="small">
+                COFFEE DATE
+            </div>
+
+
+            <h1 class="confirm-title">
+                متحمسة أشوفك
+            </h1>
+
+
+            <div class="confirm-line"></div>
+
+
+            <div class="mini-cafe">
+
+                <div class="mini-roof"></div>
+
+                <div class="mini-shop"></div>
+
+                <div class="mini-door"></div>
+
+                <div class="mini-window"></div>
+
+                <div class="mini-sign">
+                    CAFÉ<br>
+                    LUNE
+                </div>
+
+            </div>
+
+
+            <div class="details">
+
+
+                <div class="detail">
+
+                    <span class="label">
+                        المكان
+                    </span>
+
+                    <span class="value">
+                        مذكره للقهوة المختصة
+                    </span>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span class="label">
+                        التاريخ
+                    </span>
+
+                    <span class="value">
+                        الخميس، 14/10/2026 
+                    </span>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span class="label">
+                        الوقت
+                    </span>
+
+                    <span class="value">
+                        4:00 PM
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <p class="final-text">
+
+                في انتظارك 🤍
+
+            </p>
+
+
+            <div class="made">
+
+                MADE BY LETTERS
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const noButton =
+    document.getElementById(
+        "noButton"
+    );
+
+const noMessage =
+    document.getElementById(
+        "noMessage"
+    );
+
+const yesButton =
+    document.getElementById(
+        "yesButton"
+    );
+
+
+/* =====================================================
+   NO BUTTON MESSAGES
+===================================================== */
+
+let noCount = 0;
+
+const noMessages = [
+
+    "طيب… فكر مرة ثانية",
+
+    "طيب دجاج عالفحم… وبعدها قهوة؟",
+
+    "آخر فرصة…",
+
+    "ترى القهوة عليّ ☕️"
+
+];
+
+
+/* =====================================================
+   NO BUTTON ESCAPE
+===================================================== */
+
+function escapeNo(event) {
+
+    if (event) {
+        event.preventDefault();
+    }
+
+    noCount++;
+
+    noMessage.textContent =
+        noMessages[
+            Math.min(
+                noCount - 1,
+                noMessages.length - 1
+            )
+        ];
+
+    noMessage.classList.add(
+        "show"
+    );
+
+
+    const x =
+        (Math.random() * 130) - 65;
+
+    const y =
+        (Math.random() * 48) - 24;
+
+    noButton.style.transform =
+        `translate(${x}px, ${y}px)`;
+
+}
+
+
+/* =====================================================
+   TOUCH
+===================================================== */
+
+noButton.addEventListener(
+    "touchstart",
+    escapeNo,
+    {
+        passive: false
+    }
+);
+
+
+/* =====================================================
+   MOUSE / POINTER
+===================================================== */
+
+noButton.addEventListener(
+    "pointerenter",
+    function(event) {
+
+        if (
+            event.pointerType !== "touch"
+        ) {
+
+            escapeNo(event);
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   POINTER DOWN
+===================================================== */
+
+noButton.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        if (
+            event.pointerType !== "touch"
+        ) {
+
+            escapeNo(event);
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   YES
+===================================================== */
+
+yesButton.addEventListener(
+    "click",
+    sayYes
+);
+
+
+function sayYes() {
+
+    document
+        .getElementById("page1")
+        .classList
+        .remove("active");
+
+
+    createCoffeeTransition();
+
+
+    setTimeout(
+        function() {
+
+            const page2 =
+                document.getElementById(
+                    "page2"
+                );
+
+
+            page2.classList.add(
+                "active"
+            );
+
+
+            page2.classList.add(
+                "entering"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    page2.classList.remove(
+                        "entering"
+                    );
+
+                },
+                800
+            );
+
+        },
+        300
+    );
+
+}
+
+
+/* =====================================================
+   COFFEE TRANSITION
+===================================================== */
+
+function createCoffeeTransition() {
+
+
+    /* COFFEE BEANS */
+
+    for (
+        let i = 0;
+        i < 26;
+        i++
+    ) {
+
+        setTimeout(
+            function() {
+
+                const bean =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                bean.className =
+                    "coffee-bean-fall";
+
+
+                bean.style.left =
+                    (
+                        Math.random() * 100
+                    ) + "vw";
+
+
+                bean.style.setProperty(
+                    "--drift",
+                    (
+                        Math.random() * 100 - 50
+                    ) + "px"
+                );
+
+
+                bean.style.animationDuration =
+                    (
+                        1.8 +
+                        Math.random() * 1.3
+                    ) + "s";
+
+
+                bean.style.width =
+                    (
+                        9 +
+                        Math.random() * 6
+                    ) + "px";
+
+
+                bean.style.height =
+                    (
+                        14 +
+                        Math.random() * 7
+                    ) + "px";
+
+
+                document.body
+                    .appendChild(
+                        bean
+                    );
+
+
+                setTimeout(
+                    function() {
+
+                        bean.remove();
+
+                    },
+                    3500
+                );
+
+
+            },
+            i * 28
+        );
+
+    }
+
+
+    /* HEARTS */
+
+    for (
+        let i = 0;
+        i < 18;
+        i++
+    ) {
+
+        setTimeout(
+            function() {
+
+                const heart =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                heart.className =
+                    "heart-fall";
+
+
+                heart.textContent =
+                    "♡";
+
+
+                heart.style.left =
+                    (
+                        Math.random() * 100
+                    ) + "vw";
+
+
+                heart.style.fontSize =
+                    (
+                        12 +
+                        Math.random() * 10
+                    ) + "px";
+
+
+                heart.style.setProperty(
+                    "--drift",
+                    (
+                        Math.random() * 90 - 45
+                    ) + "px"
+                );
+
+
+                heart.style.animationDuration =
+                    (
+                        2 +
+                        Math.random() * 1.2
+                    ) + "s";
+
+
+                document.body
+                    .appendChild(
+                        heart
+                    );
+
+
+                setTimeout(
+                    function() {
+
+                        heart.remove();
+
+                    },
+                    3500
+                );
+
+
+            },
+            i * 45
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>
